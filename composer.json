@@ -27,11 +27,7 @@
 		"wp-coding-standards/wpcs": "^2",
 		"wp-media/phpunit": "dev-master"
 	},
-	"autoload": {
-	  "psr-4": {
-		"": "classes/"
-	  }
-	},
+	"autoload": {},
 	"autoload-dev": {},
 	"scripts": {
 		"test-unit": "\"vendor/bin/wpmedia-phpunit\" unit path=Tests/Unit",
