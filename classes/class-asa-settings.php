@@ -18,8 +18,8 @@ class ASA_Settings{
     public function add_to_settings_menu()
     {
         $menu_page = add_options_page(
-            __('ASA Crawl', 'asa-crawler'),
-            __('ASA Crawl', 'asa-crawler'),
+            __('ASA Crawl', 'rocket'),
+            __('ASA Crawl', 'rocket'),
             'manage_options',
             'asa_crawler',
             [$this, 'load_options_page']

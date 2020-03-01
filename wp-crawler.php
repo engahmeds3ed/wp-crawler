@@ -6,7 +6,7 @@
 	Author: Ahmed Saeed
 	Author URI: #
 	Version: 1.0.0
-	Text Domain: wp-crawler
+	Text Domain: rocket
 	Domain Path: /languages/
 */
 
