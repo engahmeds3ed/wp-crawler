@@ -1,16 +1,19 @@
 <?php
-/*
-	Plugin Name: ASA WordPress Crawler
-	Plugin URI: wp-media.net
-	Description: Helps you get/generate link structure for specific page
-	Author: Ahmed Saeed
-	Author URI: #
-	Version: 1.0.0
-	Text Domain: rocket
-	Domain Path: /languages/
-*/
+/**
+ * Plugin Name: ASA WordPress Crawler
+ * Plugin URI: wp-media.net
+ * Description: Helps you get/generate link structure for specific page
+ * Author: Ahmed Saeed
+ * Author URI: #
+ * Version: 1.0.0
+ * Text Domain: rocket
+ * Domain Path: /languages/
+ */
 
-class WP_crawler {
+/**
+ * Class Rocket_Crawler.
+ */
+class Rocket_Crawler {
 
 	/**
 	 * Version of this plugin
@@ -18,50 +21,53 @@ class WP_crawler {
 	const VERSION = '1.0.0';
 
 	/**
-	 * WP_crawler constructor.
+	 * Rocket_Crawler constructor.
 	 */
 	public function __construct() {
 		$this->add_constants();
 		$this->start_setup();
 	}
 
+	/**
+	 * Define constants for plugin.
+	 */
 	private function add_constants() {
-		define( 'DS', DIRECTORY_SEPARATOR );
-		define( 'ASA_CRAWLER_PLUGIN_FILE', __FILE__ );
-		define( 'ASA_CRAWLER_PLUGIN_DIRECTORY', plugin_dir_path( ASA_CRAWLER_PLUGIN_FILE ) );
+		define( 'ROCKET_CRAWLER_DS', DIRECTORY_SEPARATOR );
+		define( 'ROCKET_CRAWLER_PLUGIN_FILE', __FILE__ );
+		define( 'ROCKET_CRAWLER_PLUGIN_DIRECTORY', plugin_dir_path( ROCKET_CRAWLER_PLUGIN_FILE ) );
 	}
 
 	/**
 	 * Start the plugin main code here
 	 */
 	private function start_setup() {
-		// add autoloader to load all classes inside classes folder when needed
+		// Add autoloader to load all classes inside classes folder when needed.
 		$this->setup_autoloader();
 
-		// load text-domain from the languages folder
-		load_plugin_textdomain( 'wp-crawler', false, ASA_CRAWLER_PLUGIN_DIRECTORY . '/languages' );
+		// Load text-domain from the languages folder.
+		load_plugin_textdomain( 'wp-crawler', false, ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'languages' );
 
-		// load settings
-		$settings = new ASA_Settings();
+		// Load settings.
+		$settings = new Rocket_Settings();
 		$settings->setup();
 
-		// load crawl manager
-		$crawl_manager = new ASA_Crawl_Manager();
+		// Load crawl manager.
+		$crawl_manager = new Rocket_Crawl_Manager();
 		$crawl_manager->setup();
 
 	}
 
 	/**
-	 * initialize the autoloader to require requested files
+	 * Initialize the autoloader to require requested files.
 	 */
 	private function setup_autoloader() {
 		try {
-			require_once ASA_CRAWLER_PLUGIN_DIRECTORY . 'classes/class-asa-autoloader.php';
-			$autoLoader = new ASA_Autoloader( ASA_CRAWLER_PLUGIN_DIRECTORY . 'classes' . DS );
-			spl_autoload_register( [ $autoLoader, 'load' ] );
+			require_once ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'classes' . ROCKET_CRAWLER_DS . 'class-rocket-autoloader.php';
+			$auto_loader = new Rocket_Autoloader( ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'classes' . ROCKET_CRAWLER_DS );
+			spl_autoload_register( [ $auto_loader, 'load' ] );
 		} catch ( Exception $e ) {
 			if ( WP_DEBUG ) {
-				die( $e->getMessage() );
+				die( esc_attr( $e->getMessage() ) );
 			}
 		}
 
@@ -70,10 +76,10 @@ class WP_crawler {
 }
 
 /**
- * main function
+ * Main function.
  */
-function __wp_crawler_main() {
-	new WP_crawler();
+function rocket_crawler_main() {
+	new Rocket_Crawler();
 }
-// Initialize plugin when plugins are loaded
-add_action( 'plugins_loaded', '__wp_crawler_main' );
+// Initialize plugin when plugins are loaded.
+add_action( 'plugins_loaded', 'rocket_crawler_main' );
