@@ -34,14 +34,32 @@ class Rocket_Request_Url extends Rocket_Request {
 		if ( ! empty( $matches_links ) ) {
 			$matches_links_count = count( $matches_links[0] );
 			for ( $link_i = 0; $link_i < $matches_links_count;$link_i++ ) {
-				$output_response[] = [
-					'text' => $matches_links[2][ $link_i ],
-					'url'  => $matches_links[1][ $link_i ],
-				];
+				$link_url = $matches_links[1][ $link_i ];
+
+				if ( $this->is_internal_link( $link_url ) ) {
+					$link_text         = $matches_links[2][ $link_i ];
+					$output_response[] = [
+						'text' => $link_text,
+						'url'  => $link_url,
+					];
+				}
 			}
 		}
 
 		return $output_response;
+	}
+
+	/**
+	 * Check if this URL is internal link or not.
+	 *
+	 * @param string $link Url to be tested.
+	 * @return bool True if internal and False if External.
+	 */
+	private function is_internal_link( $link ) {
+		$link_url = wp_parse_url( $link );
+		$home_url = wp_parse_url( home_url() );
+
+		return empty( $link_url['host'] ) || $link_url['host'] === $home_url['host'];
 	}
 
 }
