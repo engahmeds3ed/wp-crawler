@@ -155,9 +155,9 @@ abstract class Rocket_Request {
 
 		// Check if request is an error.
 		if ( is_wp_error( $this->response ) ) {
-			throw new Exception( 'There was a problem connecting to the selected page.' );
+			throw new Exception( 'There was a problem connecting to the selected page.[' . $this->response->get_error_message() . ']' );
 		} else {
-			$this->set_response_body( $this->adjust_response( isset( $this->response['body'] ) ? $this->response['body'] : '' ) );
+			$this->set_response_body( $this->adjust_response( isset( $this->response['body'] ) ? $this->response['body'] : [] ) );
 		}
 	}
 

@@ -46,7 +46,7 @@ class Rocket_Settings {
 	 * Load settings page.
 	 */
 	public function load_options_page() {
-		$this->load_view( 'settings_form' );
+		Rocket_Utils::load_view( 'settings_form' );
 	}
 
 	/**
@@ -59,7 +59,8 @@ class Rocket_Settings {
 			isset( $_POST['_wpnonce'] ) &&
 			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'crawl_now_form' )
 		) {
-			do_action( 'rocket_crawler_save_settings', $_POST );
+			$url = home_url( '/' );
+			do_action( 'rocket_crawler_save_settings', $url );
 		}
 	}
 
@@ -71,20 +72,7 @@ class Rocket_Settings {
 		$links = $cache->get_cache();
 		if ( ! empty( $links ) ) {
 			$data = compact( 'links' );
-			$this->load_view( 'links', $data );
-		}
-	}
-
-	/**
-	 * Load frontend view.
-	 *
-	 * @param string $view View name.
-	 * @param array  $data Data to be passed to the view.
-	 */
-	private function load_view( $view, $data = [] ) {
-		$view_file = ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'views' . ROCKET_CRAWLER_DS . $view . '.php';
-		if ( file_exists( $view_file ) ) {
-			include $view_file;
+			Rocket_Utils::load_view( 'links', $data );
 		}
 	}
 
