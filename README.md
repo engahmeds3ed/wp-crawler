@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/engahmeds3ed/wp-crawler.svg?branch=master)](https://travis-ci.com/engahmeds3ed/wp-crawler)
 # Package Template
 Repository template for our packages
 
