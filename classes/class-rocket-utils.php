@@ -19,11 +19,22 @@ class Rocket_Utils {
 	 *
 	 * @param string $view View name.
 	 * @param array  $data Data to be passed to the view.
+	 * @param bool   $return return HTML or echo it.
+	 * @return string|null HTML content if $return was true.
 	 */
-	public static function load_view( $view, $data = [] ) {
+	public static function load_view( $view, $data = [], $return = false ) {
 		$view_file = ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'views' . ROCKET_CRAWLER_DS . $view . '.php';
+
 		if ( file_exists( $view_file ) ) {
+			if ( $return ) {
+				ob_start();
+			}
+
 			include $view_file;
+
+			if ( $return ) {
+				return ob_get_contents();
+			}
 		}
 	}
 

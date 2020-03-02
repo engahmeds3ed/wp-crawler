@@ -72,7 +72,7 @@ class Rocket_Crawl_Manager {
 	public function show_admin_errors() {
 		$rocket_errors = $this->get_errors();
 		if ( ! empty( $rocket_errors ) ) {
-			Rocket_Utils::load_view( 'errors', compact( 'rocket_errors' ) );
+			Rocket_Utils::load_view( 'backend/errors', compact( 'rocket_errors' ) );
 		}
 	}
 

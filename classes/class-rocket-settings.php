@@ -46,7 +46,7 @@ class Rocket_Settings {
 	 * Load settings page.
 	 */
 	public function load_options_page() {
-		Rocket_Utils::load_view( 'settings_form' );
+		Rocket_Utils::load_view( 'backend/settings_form' );
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Rocket_Settings {
 		$links = $cache->get_cache();
 		if ( ! empty( $links ) ) {
 			$data = compact( 'links' );
-			Rocket_Utils::load_view( 'links', $data );
+			Rocket_Utils::load_view( 'backend/links', $data );
 		}
 	}
 

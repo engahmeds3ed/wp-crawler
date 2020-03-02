@@ -55,6 +55,10 @@ class Rocket_Crawler {
 		$crawl_manager = new Rocket_Crawl_Manager();
 		$crawl_manager->setup();
 
+		// Load shortcodes.
+		$shortcodes = new Rocket_Shortcodes();
+		$shortcodes->setup();
+
 	}
 
 	/**
