@@ -1,17 +1,12 @@
 [![Build Status](https://travis-ci.com/engahmeds3ed/wp-crawler.svg?branch=master)](https://travis-ci.com/engahmeds3ed/wp-crawler)
-# Package Template
-Repository template for our packages
+
+# WP Crawler Plugin
+Wordpress plugin to crawl pages, extract internal links and show them to admin/visitors.
 
 # Usage
-When creating a new repository for a package or a plugin, select this repository as the template. It will initialize the new repository with all the structure & files contained in the template.
+1. After uploading/installing the plugin, you can find a menu link called `Rocket Crawler` under `settings` menu item which has the button to initiate the crawling process also shows admin links after completion.
+2. You can use the shortcode `[rocket_links classes="CSS classes for the table containing the links"]` at any page, post, widget or even custom post content to view links for visitor.
 
-# Content
-* `bin/install-wp-tests.sh`: installer for WordPress tests suite
-* `.editorconfig`: config file for your IDE to follow our coding standards
-* `.gitattributes`: list of directories & files excluded from export
-* `.gitignore`: list of directories & files excluded from versioning
-* `.travis.yml`: Travis-CI configuration file
-* `composer.json`: Base composer file to customize for the project
-* `LICENSE`: License file using GPLv3
-* `phpcs.xml`: Base PHP Code Sniffer configuration file to customize for the project
-* `README.md`: The readme displayed on Github, to customize for the project
+#Credits
+1. [Wp-Media](https://wp-media.me/): for amazing WP plugin package.
+2. [Ahmed Saeed](https://github.com/engahmeds3ed) As main contributor for now.
