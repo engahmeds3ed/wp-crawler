@@ -52,7 +52,9 @@ class Rocket_Crawler {
 		$settings->setup();
 
 		// Load crawl manager.
-		$crawl_manager = new Rocket_Crawl_Manager();
+		$request       = new Rocket_Request_Url();
+		$cache         = new Rocket_Cache();
+		$crawl_manager = new Rocket_Crawl_Manager( $request, $cache );
 		$crawl_manager->setup();
 
 		// Load shortcodes.

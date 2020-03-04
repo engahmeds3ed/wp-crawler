@@ -61,7 +61,7 @@ abstract class Rocket_Request {
 	 *
 	 * @param string $url Page url.
 	 */
-	protected function set_url( $url ) {
+	public function set_url( $url ) {
 		$this->url = $url;
 	}
 

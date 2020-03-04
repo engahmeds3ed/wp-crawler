@@ -16,10 +16,28 @@ class Rocket_Crawl_Manager {
 	private $errors = [];
 
 	/**
-	 * Rocket_Crawl_Manager constructor.
+	 * Cache object.
+	 *
+	 * @var Rocket_Cache|null object of cache.
 	 */
-	public function __construct() {
+	private $cache = null;
 
+	/**
+	 * Request Object.
+	 *
+	 * @var Rocket_Request|null object of request.
+	 */
+	private $request = null;
+
+	/**
+	 * Rocket_Crawl_Manager constructor.
+	 *
+	 * @param Rocket_Request $request Request object.
+	 * @param Rocket_Cache   $cache Cache object.
+	 */
+	public function __construct( Rocket_Request $request, Rocket_Cache $cache ) {
+		$this->cache   = $cache;
+		$this->request = $request;
 	}
 
 	/**
@@ -54,12 +72,12 @@ class Rocket_Crawl_Manager {
 	 * @param string $url Url to crawl.
 	 */
 	public function crawl_now( $url ) {
-		$request = new Rocket_Request_Url( $url );
+		$this->request->set_url( $url );
 		try {
-			$request->do_request();
-			$links = $request->get_response_body();
-			$cache = new Rocket_Cache();
-			$cache->set_cache( $links );
+			$this->request->do_request();
+			$links = $this->request->get_response_body();
+
+			$this->cache->set_cache( $links );
 		} catch ( Exception $e ) {
 			$this->set_errors( [ esc_attr( $e->getMessage() ) ] );
 		}

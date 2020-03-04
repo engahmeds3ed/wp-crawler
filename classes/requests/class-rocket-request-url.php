@@ -14,10 +14,12 @@ class Rocket_Request_Url extends Rocket_Request {
 	 *
 	 * @param string $url send url in initialization of class.
 	 */
-	public function __construct( $url = '/' ) {
+	public function __construct( $url = '' ) {
 		parent::__construct();
 
-		$this->set_url( $url );
+		if ( ! empty( $url ) ) {
+			$this->set_url( $url );
+		}
 	}
 
 	/**
