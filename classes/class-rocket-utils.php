@@ -33,7 +33,9 @@ class Rocket_Utils {
 			include $view_file;
 
 			if ( $return ) {
-				return ob_get_contents();
+				$contents = ob_get_contents();
+				ob_end_clean();
+				return $contents;
 			}
 		}
 	}
