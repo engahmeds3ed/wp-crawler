@@ -25,7 +25,7 @@ class Rocket_Utils {
 	 * @return string|null HTML content if $return was true.
 	 */
 	public static function load_view( $view, $data = [], $return = false ) {
-		$view_file = ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'views' . ROCKET_CRAWLER_DS . $view . '.php';
+		$view_file = ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'Views' . ROCKET_CRAWLER_DS . $view . '.php';
 
 		if ( file_exists( $view_file ) ) {
 			if ( $return ) {
