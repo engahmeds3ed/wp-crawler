@@ -10,6 +10,12 @@
  * Domain Path: /languages/
  */
 
+use Rocket\Classes\Rocket_Settings;
+use Rocket\Classes\Requests\Rocket_Request_Url;
+use Rocket\Classes\Rocket_Cache;
+use Rocket\Classes\Rocket_Crawl_Manager;
+use Rocket\Classes\Rocket_Shortcodes;
+
 /**
  * Class Rocket_Crawler.
  */
@@ -68,8 +74,8 @@ class Rocket_Crawler {
 	 */
 	private function setup_autoloader() {
 		try {
-			require_once ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'classes' . ROCKET_CRAWLER_DS . 'class-rocket-autoloader.php';
-			$auto_loader = new Rocket_Autoloader( ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'classes' . ROCKET_CRAWLER_DS );
+			require_once ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'Classes' . ROCKET_CRAWLER_DS . 'class-rocket-autoloader.php';
+			$auto_loader = new Rocket_Autoloader();
 			spl_autoload_register( [ $auto_loader, 'load' ] );
 		} catch ( Exception $e ) {
 			if ( WP_DEBUG ) {

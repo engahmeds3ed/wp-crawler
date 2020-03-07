@@ -1,4 +1,9 @@
 <?php
+
+namespace Rocket\Classes;
+
+use Rocket\Classes\Requests\Rocket_Request;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Nothing Here!' );
 } // die if called directly.

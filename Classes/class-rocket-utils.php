@@ -5,6 +5,8 @@
  * @author    Ahmed Saeed <eng.ahmeds3ed@gmail.com>
  */
 
+namespace Rocket\Classes;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Nothing Here!' );
 } // die if called directly.
