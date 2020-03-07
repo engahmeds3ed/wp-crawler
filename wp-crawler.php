@@ -30,29 +30,57 @@ class Rocket_Crawler {
 	 * Rocket_Crawler constructor.
 	 */
 	public function __construct() {
+
+	}
+
+	/**
+	 * Load dependencies and application.
+	 */
+	public function setup() {
 		$this->add_constants();
-		$this->start_setup();
-	}
 
-	/**
-	 * Define constants for plugin.
-	 */
-	private function add_constants() {
-		define( 'ROCKET_CRAWLER_DS', DIRECTORY_SEPARATOR );
-		define( 'ROCKET_CRAWLER_PLUGIN_FILE', __FILE__ );
-		define( 'ROCKET_CRAWLER_PLUGIN_DIRECTORY', plugin_dir_path( ROCKET_CRAWLER_PLUGIN_FILE ) );
-	}
-
-	/**
-	 * Start the plugin main code here
-	 */
-	private function start_setup() {
 		// Add autoloader to load all classes inside classes folder when needed.
 		$this->setup_autoloader();
 
 		// Load text-domain from the languages folder.
 		load_plugin_textdomain( 'wp-crawler', false, ROCKET_CRAWLER_PLUGIN_DIRECTORY . 'languages' );
 
+		$this->start_application();
+	}
+
+	/**
+	 * Load constants and autoloader for testing.
+	 */
+	public function setup_test() {
+		$this->add_constants();
+
+		// Add autoloader to load all classes inside classes folder when needed.
+		$this->setup_autoloader();
+	}
+
+	/**
+	 * Define constants for plugin.
+	 */
+	private function add_constants() {
+		if( !defined( 'ROCKET_CRAWLER_DS' ) )
+			define( 'ROCKET_CRAWLER_DS', DIRECTORY_SEPARATOR );
+
+		if( !defined( 'ROCKET_CRAWLER_PLUGIN_FILE' ) )
+			define( 'ROCKET_CRAWLER_PLUGIN_FILE', __FILE__ );
+
+		if( !defined( 'ROCKET_CRAWLER_PLUGIN_DIRECTORY' ) ) {
+			if( !defined('ROCKET_IN_TESTING') ) {
+				define( 'ROCKET_CRAWLER_PLUGIN_DIRECTORY', plugin_dir_path( ROCKET_CRAWLER_PLUGIN_FILE ) );
+			}else{
+				define( 'ROCKET_CRAWLER_PLUGIN_DIRECTORY', rtrim( ( dirname( ROCKET_CRAWLER_PLUGIN_FILE ) ), '/\\' ) . ROCKET_CRAWLER_DS );
+			}
+		}
+	}
+
+	/**
+	 * Start the main functionality of application after loading dependencies.
+	 */
+	private function start_application() {
 		// Load settings.
 		$settings = new Rocket_Settings();
 		$settings->setup();
@@ -66,7 +94,6 @@ class Rocket_Crawler {
 		// Load shortcodes.
 		$shortcodes = new Rocket_Shortcodes();
 		$shortcodes->setup();
-
 	}
 
 	/**
@@ -91,7 +118,11 @@ class Rocket_Crawler {
  * Main function.
  */
 function rocket_crawler_main() {
-	new Rocket_Crawler();
+	$crawler = new Rocket_Crawler();
+	$crawler->setup();
 }
-// Initialize plugin when plugins are loaded.
-add_action( 'plugins_loaded', 'rocket_crawler_main' );
+
+if( !defined('ROCKET_IN_TESTING') ) {
+	// Initialize plugin when plugins are loaded.
+	add_action( 'plugins_loaded', 'rocket_crawler_main' );
+}
