@@ -62,16 +62,18 @@ class Rocket_Crawler {
 	 * Define constants for plugin.
 	 */
 	private function add_constants() {
-		if( !defined( 'ROCKET_CRAWLER_DS' ) )
+		if ( ! defined( 'ROCKET_CRAWLER_DS' ) ) {
 			define( 'ROCKET_CRAWLER_DS', DIRECTORY_SEPARATOR );
+		}
 
-		if( !defined( 'ROCKET_CRAWLER_PLUGIN_FILE' ) )
+		if ( ! defined( 'ROCKET_CRAWLER_PLUGIN_FILE' ) ) {
 			define( 'ROCKET_CRAWLER_PLUGIN_FILE', __FILE__ );
+		}
 
-		if( !defined( 'ROCKET_CRAWLER_PLUGIN_DIRECTORY' ) ) {
-			if( !defined('ROCKET_IN_TESTING') ) {
+		if ( ! defined( 'ROCKET_CRAWLER_PLUGIN_DIRECTORY' ) ) {
+			if ( ! defined( 'ROCKET_IN_TESTING' ) ) {
 				define( 'ROCKET_CRAWLER_PLUGIN_DIRECTORY', plugin_dir_path( ROCKET_CRAWLER_PLUGIN_FILE ) );
-			}else{
+			} else {
 				define( 'ROCKET_CRAWLER_PLUGIN_DIRECTORY', rtrim( ( dirname( ROCKET_CRAWLER_PLUGIN_FILE ) ), '/\\' ) . ROCKET_CRAWLER_DS );
 			}
 		}
@@ -122,7 +124,7 @@ function rocket_crawler_main() {
 	$crawler->setup();
 }
 
-if( !defined('ROCKET_IN_TESTING') ) {
+if ( ! defined( 'ROCKET_IN_TESTING' ) ) {
 	// Initialize plugin when plugins are loaded.
 	add_action( 'plugins_loaded', 'rocket_crawler_main' );
 }
