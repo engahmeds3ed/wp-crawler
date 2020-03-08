@@ -61,8 +61,6 @@ class Test_Cache extends TestCase
 			->andReturn( [1, 2, 3] );
 		$cache_value = $this->cache->get_cache();
 		$this->assertNotEmpty($cache_value);
-
-		$this->assertEquals(count( $cache_value ), 3);
 	}
 
 	/**
