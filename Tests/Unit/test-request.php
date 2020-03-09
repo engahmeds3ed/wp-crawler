@@ -23,6 +23,15 @@ class Test_Request extends TestCase
 		parent::setUp();
 	}
 
+	/**
+	 * Test valid internal links with no schema urls.
+	 *
+	 * @covers ::adjust_response
+	 * @uses wp_remote_request(), wp_parse_url(), home_url()
+	 * @group Request
+	 *
+	 * @throws Monkey\Expectation\Exception\ExpectationArgsRequired
+	 */
 	public function testValidInternalLinksRequestWithNoSchema() {
 		$url = "";
 		Monkey\Functions\expect( 'wp_remote_request' )
@@ -57,6 +66,15 @@ class Test_Request extends TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	/**
+	 * Test valid internal links with schema urls.
+	 *
+	 * @covers ::adjust_response
+	 * @uses wp_remote_request(), wp_parse_url(), home_url()
+	 * @group Request
+	 *
+	 * @throws Monkey\Expectation\Exception\ExpectationArgsRequired
+	 */
 	public function testValidInternalLinksRequestWithSchema() {
 		$url = "http://localhost/page";
 		$home_url = "http://localhost/";
