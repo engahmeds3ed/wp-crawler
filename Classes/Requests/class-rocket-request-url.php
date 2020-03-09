@@ -33,7 +33,7 @@ class Rocket_Request_Url extends Rocket_Request {
 	 */
 	protected function adjust_response( $response_html ) {
 		$output_response = [];
-		$regex_pattern   = '/<a href="([^"]+)">([^<]+)<\/a>/';
+		$regex_pattern   = '/<a href=[\'|"]([^[\'|"]+)[\'|"]>([^<]+)<\/a>/';
 		preg_match_all( $regex_pattern, $response_html, $matches_links );
 
 		if ( ! empty( $matches_links ) ) {
