@@ -41,5 +41,7 @@
 		"phpcs-changed": "./bin/phpcs-changed.sh",
 		"phpcs:fix": "phpcbf"
 	},
-	"require": {}
+	"require": {
+      "ext-json": "*"
+    }
 }
